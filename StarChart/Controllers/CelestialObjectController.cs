@@ -41,5 +41,20 @@ namespace StarChart.Controllers
             }
             return Ok(celestialObjects);
         }
+
+        [HttpGet]
+        public IActionResult GetAll()
+        {
+            var celestialObjects = _context.CelestialObjects;
+            if (!celestialObjects.Any())
+            {
+                return NotFound();
+            }
+            foreach (var celestialObject in celestialObjects)
+            {
+                celestialObject.Satellites = _context.CelestialObjects.Where(x => x.OrbitedObjectId == celestialObject.Id).ToList();
+            }
+            return Ok(celestialObjects);
+        }
     }
 }
