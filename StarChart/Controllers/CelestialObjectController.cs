@@ -62,7 +62,7 @@ namespace StarChart.Controllers
         public IActionResult Create([FromBody] CelestialObject c)
         {
             _context.CelestialObjects.AddAsync(c);
-            _context.SaveChangesAsync();
+            _context.SaveChanges();
             return Ok(c);
         }
     }
